@@ -10,8 +10,8 @@ import (
 var router *gin.Engine
 
 type Request struct {
-	Site []string `json:"site"`
-	SearchText string `json:"searchString"`
+	Site []string `json:"Site"`
+	SearchText string `json:"SearchString"`
 }
 
 type Response struct {
