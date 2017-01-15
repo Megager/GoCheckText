@@ -5,8 +5,6 @@ import (
 	"gopkg.in/gin-gonic/gin"
 	"io/ioutil"
 	"encoding/json"
-	"fmt"
-	"bytes"
 )
 
 var router *gin.Engine
@@ -55,5 +53,5 @@ func main() {
 	})
 
 	router.Run();
-	
+
 }
