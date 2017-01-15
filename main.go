@@ -5,6 +5,8 @@ import (
 	"gopkg.in/gin-gonic/gin"
 	"io/ioutil"
 	"encoding/json"
+	"fmt"
+	"bytes"
 )
 
 var router *gin.Engine
@@ -22,9 +24,10 @@ func main() {
 
 	router = gin.Default();
 
-	router.POST("/",func(c *gin.Context){
+	router.POST("/checkText",func(c *gin.Context){
 		req := Request{}
 		body, _ := ioutil.ReadAll(c.Request.Body)
+
 		json.Unmarshal(body, &req)
 		sites:=req.Site;
 		searchText:=req.SearchText
@@ -51,6 +54,13 @@ func main() {
 		}
 	})
 
-	router.Run()
+	router.Run();
+	var jsonStr = []byte(`{
+				   "Site":["https://google.com","https://yahoo.com"],
+   				   "SearchText":"Google"
+			  }`);
+	req, _ := http.NewRequest("POST", "http://localhost:8080/checkText", bytes.NewBuffer(jsonStr));
+	client := &http.Client{}
+	client.Do(req);
 
 }
