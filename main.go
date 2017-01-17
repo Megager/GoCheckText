@@ -24,8 +24,10 @@ func main() {
 
 	router.POST("/checkText",func(c *gin.Context){
 		req := Request{}
-		body, _ := ioutil.ReadAll(c.Request.Body)
-
+		body, err := ioutil.ReadAll(c.Request.Body)
+		if err!=nil {
+			defer c.Request.Body.Close()
+		}
 		json.Unmarshal(body, &req)
 		sites:=req.Site;
 		searchText:=req.SearchText
